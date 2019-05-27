@@ -1,0 +1,52 @@
+{% extends "layout.html" %}
+{% block body %}
+<h3>Kontrol Paneli</h3>
+<hr>
+<h6> <small>Holgeldin  {{request.user.get_full_name}} </small>  </h6> 
+<hr>
+<a class="btn btn-danger" href="{% url 'art:addarticle' %}">Makale Ekle</a>
+<hr>
+
+{% if articles %}
+<table class="table table-hover">
+    <thead>
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Title</th>
+        <th scope="col">Created Date</th>
+        <th scope="col">Author</th>
+        <th scope="col">Image</th>
+        <th scope="col">Update</th>
+        <th scope="col">Delete</th>
+      </tr>
+    </thead>
+    <tbody>
+        {% for article in articles %}
+        <tr>
+            <th scope="row">{{article.id}}</th>
+            <td><a href="{% url 'art:detail' article.id %}">{{article.title}}</a></td>
+            <td>{{article.created_date}}</td>
+            <td>{{article.author.username}}</td>
+            {% if article.article_image %}
+            <td>{{article.article_image.url}}</td>
+            {% else %}
+            <td>Yok</td>
+            {% endif %}
+            
+            <td><a class="btn btn-warning btn-sm" href="{% url 'art:update' article.id %}">Update</a></td>
+            <td><a class="btn btn-danger btn-sm" href="{% url 'art:delete' article.id %}">Delete</a></td>
+        </tr>
+        {% endfor %}
+
+       
+    </tbody>
+  </table>
+
+{% else %}
+<div class="alert alert-danger">"Herhangibir makele yoktur"</div>
+{% endif %}
+
+
+
+
+{% endblock body %}

@@ -1,0 +1,41 @@
+{% extends "layout.html" %}
+{% load static %}
+
+{% block head %}
+
+<link rel="stylesheet" href="{% static 'article/css/style.css' %}"> 
+
+{% endblock head %}
+
+{% block body %}
+
+<div class="jumbotron text-center">
+    <h3>welcome</h3>
+</div>
+<br><br>
+<p>Css Testi {{Aciklama}}</p>
+
+<lu>
+    {% if request.user.is_authenticated %}
+        <p>Giriş yapılmıştır................</p>
+        <li>.................{{request.user.username}}</li>
+        <li>.................{{request.user.email}}</li>
+        <li>.................{{request.user.get_full_name}}</li>
+        <li>.................{{request.user.groups.all.0}}</li>
+        <li>.................{{request.user.last_login}}</li>
+    {% else %}
+        Giriş yapılmadı
+    {% endif %}
+</lu>
+
+
+<ul>
+    {% for x in numbers  %}
+        <li>
+            {{x}}
+        </li>
+    {% endfor %}
+</ul>
+
+
+{% endblock  %}
